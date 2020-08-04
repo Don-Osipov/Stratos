@@ -18,7 +18,7 @@
       <div class="startups-alums">
         <div class="startups-alums__title">
           <h4>Top Five Startups From UIUC Alums</h4>
-          <img src="../assets/Alum.svg" alt="Student Graphic" />
+          <img src="../assets/Alum.svg" alt="Student Graphic" class="alum" />
         </div>
         <Startups></Startups>
       </div>
@@ -32,6 +32,12 @@ import Startups from '@/components/Startups.vue';
 export default {
   components: {
     Startups
+  },
+  props: {
+    uniName: {
+      type: String,
+      default: ''
+    }
   }
 };
 </script>
@@ -50,19 +56,21 @@ export default {
   padding: 0 5%
   margin-top: 8rem
 
+.alum
+  margin-left: 1rem
 
 .startups-student, .startups-alums
   margin-bottom: 4.5rem
 
 .startups-student__title, .startups-alums__title
-    display: flex
-    justify-content: center
-    align-items: center
-    margin-bottom: 3rem
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-bottom: 3rem
 
-    & h4
-      font-size: 4rem
-      color: $c-UIUCOrange
+  & h4
+    font-size: 4rem
+    color: $c-UIUCOrange
 
     & img
       height: 12rem

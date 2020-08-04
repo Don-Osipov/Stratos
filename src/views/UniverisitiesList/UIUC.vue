@@ -18,13 +18,18 @@
           fill="#EE5239"
         />
       </svg>
-      <h3 class="title">Univeristy of Illinois (UIUC)</h3>
-      <UniversityInfo
+      <h3 class="title">{{ fullUniversityName }}</h3>
+      <UniversityInfo :uni-name="uniName"></UniversityInfo>
+      <!-- <UniversityInfo
         :fast-facts="fastFacts"
         :opportunities-text="opportunitiesForVC"
-      ></UniversityInfo>
-      <FounderRanking :founder-cards="founderCards"></FounderRanking>
-      <Top5Startups></Top5Startups>
+      ></UniversityInfo>-->
+      <FounderRanking :uni-name="uniName"></FounderRanking>
+      <!-- <FounderRanking
+        v-if="!(founderCards === undefined) || !(founderCards.length == 0)"
+        :founder-cards="founderCards"
+      ></FounderRanking>-->
+      <Top5Startups :uni-name="uniName"></Top5Startups>
       <svg
         class="wave2"
         viewBox="0 0 1440 95"
@@ -46,66 +51,87 @@
 import UniversityInfo from '@/components/UniversityInfo.vue';
 import FounderRanking from '@/components/FounderRanking.vue';
 import Top5Startups from '@/components/Top5Startups.vue';
+import { store } from '@/store/store.js';
 export default {
   name: 'Universities',
   data() {
     return {
-      primaryColor: '',
-      uniName: '',
-      fastFacts: [],
-      logoImgUrl: '',
-      uniImgUrl: '',
-      opportunitiesForVC: [],
-      founderCards: []
+      uniName: 'UIUC' // THIS NEEDS TO BE CHANGED
     };
   },
+  async beforeRouteEnter(to, from, next) {
+    // console.log(to);
+    // console.log(from);
+    // console.log(next);
+
+    await store.dispatch('addUniversity', {
+      name: 'UIUC', // THIS NEEDS TO BE CHANGED
+      contentfulID: '7H5uEmao3VFYiKeeiUtw9D' // THIS NEEDS TO BE CHANGED
+      // content: {
+      //   primaryColor: '',
+      //   uniName: '',
+      //   fastFacts: [],
+      //   logoImgUrl: '',
+      //   uniImgUrl: '',
+      //   opportunitiesForVC: [],
+      //   founderCards: []
+      // }
+    });
+    next();
+  },
+  // data() {
+  //   return {};
+  // },
   components: {
     UniversityInfo,
     FounderRanking,
     Top5Startups
   },
+  computed: {
+    fullUniversityName() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'fullUniName'
+      });
+    }
+  },
   created() {
     document.body.classList.remove('open');
     document.documentElement.classList.remove('open');
 
-    this.$content.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
-      // logs the entry metadata
-      // console.log(entry.sys);
-      let temp = entry.fields;
-      // logs the field with ID titl
-      temp.funFactsText.split('\n\n').forEach((el, i) => {
-        this.fastFacts[i] = el;
-      });
-      temp.opportunitiesForVCsText.split('\n\n').forEach((el, i) => {
-        this.opportunitiesForVC[i] = el;
-      });
-      // console.log(this.opportunitiesForVC);
-      // console.log(temp);
-      temp.founderCards.fields.cards.forEach((el, index) => {
-        this.$content.getEntry(el.sys.id).then(entry => {
-          // console.log(entry);
-          this.founderCards[index] = entry.fields;
-        });
-      });
-    });
-    this.$content
-      .getAssets()
-      .then(function(assets) {
-        // console.log(assets);
-        assets.items.forEach((asset, index) => {
-          let imageURL = 'https:' + asset.fields.file.url;
-          // console.log(imageURL);
-        });
-        // assets.items.map(function(asset) {
-        //   var imageURL = 'https:' + asset.fields.file.url;
-        //   console.log(imageURL);
-        // });
-      })
-      .catch(function(e) {
-        // console.log(e);
-      });
-    // console.log(this.founderCards);
+    // this.$content.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
+    //   console.log(entry);
+    //   // logs the entry metadata
+    //   // console.log(entry.sys);
+    //
+    //   // logs the field with ID titl
+    //   //
+
+    //   // // console.log(this.opportunitiesForVC);
+    //   // // console.log(temp);
+
+    // });
   }
+  // created() {
+  //   console.log(this.$content);
+  // this.$content
+  //   .getAssets()
+  //   .then(function(assets) {
+  //     // console.log(assets);
+  //     assets.items.forEach((asset, index) => {
+  //       let imageURL = 'https:' + asset.fields.file.url;
+  //       // console.log(imageURL);
+  //     });
+  //     // assets.items.map(function(asset) {
+  //     //   var imageURL = 'https:' + asset.fields.file.url;
+  //     //   console.log(imageURL);
+  //     // });
+  //   })
+  //   .catch(function(e) {
+  //     // console.log(e);
+  //   });
+  //   // console.log(this.founderCards);
+  // }
 };
 </script>
 

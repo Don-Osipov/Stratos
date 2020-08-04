@@ -5,25 +5,18 @@ import router from './router';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
 import VueSmoothScroll from 'vue2-smooth-scroll';
-import axios from 'axios';
+// import axios from 'axios';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/app';
-var contentful = require('contentful');
+import { store } from './store/store';
 
-var client = contentful.createClient({
-  // space: 'wmb72ezukoy3',
-  // accessToken: 'VaSh5bPEXLwagwQimdT0TsbF_oF_VYjRUHdX-sldSZM'
-  space: 'oz2jemoxzt65',
-  accessToken: 'apYDWsVPf0mEhcHncPvoFYm1l1ymgVG_6jo8qB_VjL4'
-});
-
-client.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
-  // logs the entry metadata
-  // console.log(entry.sys);
-  // logs the field with ID title
-  // console.log(entry.fields);
-});
+// client.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
+// logs the entry metadata
+// console.log(entry.sys);
+// logs the field with ID title
+// console.log(entry.fields);
+// });
 
 // client
 //   .getAssets()
@@ -61,13 +54,13 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 
 Vue.prototype.$firebaseTest = firebase;
 
-Vue.prototype.$axios = axios;
+// Vue.prototype.$universities = store.state.universities
+// sm
 
-Vue.prototype.$content = client;
+// Vue.prototype.$axios = axios;
 
 Vue.use(VueSmoothScroll, {
   duration: 400,
@@ -85,6 +78,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (!app) {
     app = new Vue({
       router,
+      store,
       render: h => h(App)
     }).$mount('#app');
   }

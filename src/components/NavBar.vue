@@ -91,8 +91,8 @@ export default {
     nextPage() {
       const path = this.path;
       const routeList = this.routeList;
-      console.log(path);
-      console.log(routeList);
+      // console.log(path);
+      // console.log(routeList);
       let pathIndex;
       for (let i = 0; i < routeList.length; i++) {
         const el = routeList[i].path;
@@ -141,8 +141,8 @@ export default {
     // const links = document.querySelectorAll('.nav__links li');
     // console.log(this.$router.currentRoute.path);
     // console.log(this.$router.options.routes);
-    console.log(this.nextPage);
-    console.log(this.routeList[this.nextPage]);
+    // console.log(this.nextPage);
+    // console.log(this.routeList[this.nextPage]);
 
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('open');

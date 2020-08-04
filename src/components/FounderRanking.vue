@@ -8,8 +8,22 @@
     </svg>
     <div class="info">
       <div class="founder">
-        <h4 @click="test()">Where to Find Founders</h4>
+        <h4>Where to Find Founders</h4>
+        <!-- <h4>{{ this.$store.state.counter }}</h4> -->
+        <!-- <h4>{{ founderCards }}</h4> -->
         <div class="founderCard-wrapper">
+          <!-- <div>{{ founderCards }}</div> -->
+          <!-- <div
+            class="founder--card-1"
+            v-for="(item, index) in founderCards"
+            :key="index"
+          >
+            <div class="founder--card-1__number">1.</div>
+            <div class="founder--card-1__inner">
+              <h5>{{ item[index].title }}</h5>
+              <p>{{ item[index].info }}</p>
+            </div>
+          </div>-->
           <div class="founder--card-1">
             <div class="founder--card-1__number">1.</div>
             <div class="founder--card-1__inner">
@@ -27,7 +41,7 @@
           <div class="founder--card-1 founder--card-1--2">
             <div class="founder--card-1__number">3.</div>
             <div class="founder--card-1__inner">
-              <h5>{{ founderCards[2].title }}}</h5>
+              <h5>{{ founderCards[2].title }}</h5>
               <p>{{ founderCards[2].info }}</p>
             </div>
           </div>
@@ -93,25 +107,49 @@
 <script>
 export default {
   props: {
-    founderCards: {
-      type: Array,
-      default() {
-        return [];
-      }
+    uniName: {
+      type: String,
+      default: ''
     }
-
-    // opportunitiesText: {
-    //   type: Array,
-    //   default() {
-    //     return [];
-    //   }
-    // }
   },
-  methods: {
-    test() {
-      // console.log(this.founderCards);
+  computed: {
+    founderCards() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'founderCards'
+      });
+    }
+  },
+  mounted() {
+    try {
+      console.log(this.founderCards[0]);
+    } catch (error) {
+      console.log('ERROR');
+      console.log(error);
     }
   }
+  // props: ['founderCards'],
+  // props: {
+  //   founderCards: {
+  //     type: Object,
+  //     default() {
+  //       return [];
+  //     }
+  //   }
+  // },
+  // created() {
+  //   console.log(typeof this.founderCards);
+  // }
+  //   // opportunitiesText: {
+  //   //   type: Array,
+  //   //   default() {
+  //   //     return [];
+  //   //   }
+  //   // }
+  // },
+  // beforeCreate() {
+  //   console.log(this.founderCards);
+  // },
 };
 </script>
 

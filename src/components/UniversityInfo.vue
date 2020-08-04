@@ -3,26 +3,27 @@
     <section class="info">
       <div class="top-row" id="top-row">
         <div class="fastFacts">
-          <h4 @click="test()">Fast Facts</h4>
+          <h4>Fast Facts</h4>
           <p class="fastfact">{{ fastFacts[0] }}</p>
           <p class="fastfact">{{ fastFacts[1] }}</p>
           <p class="fastfact">{{ fastFacts[2] }}</p>
           <p class="fastfact">{{ fastFacts[3] }}</p>
         </div>
         <img
-          src="../assets/UIUCLogo.png"
+          :src="logoImageUrl"
           alt="University of Illinois Logo"
           class="UIUCLogo"
         />
       </div>
       <div class="bot-row">
         <img
-          src="../assets/UIUCImage.png"
+          :src="uniImageUrl"
           alt="University of Illinois Image"
           class="UIUCImage"
         />
         <div class="opportunities">
           <h4>Opportunities for VCs</h4>
+          <!-- <h4>Opportunities for VCs</h4> -->
           <p class="opportunity">{{ opportunitiesText[0] }}</p>
           <p class="opportunity">{{ opportunitiesText[1] }}</p>
         </div>
@@ -37,12 +38,12 @@
         <p class="fastfact">{{ fastFacts[3] }}</p>
       </div>
       <img
-        src="../assets/UIUCLogo.png"
+        :src="logoImageUrl"
         alt="University of Illinois Logo"
         class="UIUCLogo"
       />
       <img
-        src="../assets/UIUCImage.png"
+        :src="uniImageUrl"
         alt="University of Illinois Image"
         class="UIUCImage"
       />
@@ -57,26 +58,87 @@
 
 <script>
 export default {
-  props: {
-    fastFacts: {
-      type: Array,
-      default() {
-        return ['lorem'];
-      }
+  computed: {
+    fastFacts() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'fastFacts'
+      });
     },
-    opportunitiesText: {
-      type: Array,
-      default() {
-        return [];
-      }
+    opportunitiesText() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'opportunitiesForVC'
+      });
+    },
+    fullUniversityName() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'fullUniName'
+      });
+    },
+    logoImageUrl() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'logoImgUrl'
+      });
+    },
+    uniImageUrl() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'uniImgUrl'
+      });
     }
   },
-  methods: {
-    test() {
-      // console.log(this.fastFacts);
-      // console.log(this.opportunitiesText);
+  props: {
+    uniName: {
+      type: String,
+      default: ''
     }
   }
+  // mounted() {
+  //   console.log(this.logoImageUrl);
+  //   console.log(this.uniImageUrl);
+  //   console.log('TESTING');
+  //   console.log(
+  //     this.$store.getters.getSpecificContent({
+  //       uniName: this.uniName,
+  //       contentName: 'logoImgUrl'
+  //     })
+  //   );
+  // },
+  // data() {
+  //   return {
+  //     fastFacts: this.$store.getters.getSpecificContent({
+  //       uniName: 'UIUC',
+  //       contentName: 'fastFacts'
+  //     })
+  //   };
+  // created() {
+  // console.log(
+  //   this.$store.getters.getSpecificContent({
+  //     uniName: 'UIUC',
+  //     contentName: 'fastFacts'
+  //   })
+  // );
+  // console.log(this.$store.state.universities);
+  // console.log(this.$store.state.universities.UIUC.fastFacts);
+  // console.log(this.$store.state.universities);
+  // console.log(this.$store.state.universities['UIUC']);
+  // console.log(this.$store.getters.test);
+  // console.log(this.funFacts);
+  // }
+
+  // created() {
+  //   // console.log(this.$store.getters.getUniversity('UIUC'));
+  //   console.log(this.$store.getters.getUniversities);
+  // }
+  // methods: {
+  //   test() {
+  //     // console.log(this.fastFacts);
+  //     // console.log(this.opportunitiesText);
+  //   }
+  // }
   // mounted() {
   //   // this.limitFunc();
   //   console.log(this.fastFacts);
