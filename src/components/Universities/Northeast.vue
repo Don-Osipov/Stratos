@@ -14,7 +14,11 @@
 
     <div class="interior">
       <ul class="list">
-        <li>Babson College</li>
+        <li>
+          <router-link to="/universities/babson"
+            >Babson University</router-link
+          >
+        </li>
         <li>Brown University</li>
         <li>Carnegie Mellon University</li>
         <li>
