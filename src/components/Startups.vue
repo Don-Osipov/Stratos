@@ -1,42 +1,48 @@
 <template>
   <div class="startupWrapper">
-    <div class="img1-wrap">
-      <img :src="images[0]" alt="Accenture" class="img1" />
+    <div class="img-wrap" v-for="(item, index) in imagesArr" :key="index">
+      <img :src="item" alt="CompanyLogos" class="img" />
+    </div>
+    <!-- <div class="img1-wrap">
+      <img :src="imagesArr[0]" alt="Accenture" class="img1" />
     </div>
     <div>
-      <img :src="images[1]" alt="GSV-Ventures" class="img2" />
+      <img :src="imagesArr[1]" alt="GSV-Ventures" class="img2" />
     </div>
     <div>
-      <img :src="images[2]" alt="DNcap" class="img3" />
+      <img :src="imagesArr[2]" alt="DNcap" class="img3" />
     </div>
     <div>
-      <img :src="images[3]" alt="Cydan" class="img4" />
+      <img :src="imagesArr[3]" alt="Cydan" class="img4" />
     </div>
     <div class="img5-wrap">
-      <img :src="images[4]" alt="SRI Capital" class="img5" />
+      <img :src="imagesArr[4]" alt="SRI Capital" class="img5" />
     </div>
     <div>
-      <img :src="images[5]" alt="Midway Ventures" class="img6" />
-    </div>
+      <img :src="imagesArr[5]" alt="Midway Ventures" class="img6" />
+    </div>-->
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    uniName: {
-      type: String,
-      default: ''
-    }
-  },
-  computed: {
-    images() {
-      return this.$store.getters.getSpecificContent({
-        uniName: this.uniName,
-        contentName: 'startupsStudents'
-      });
+    imagesArr: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   }
+
+  // computed: {
+  //   images() {
+  //     return this.$store.getters.getSpecificContent({
+  //       uniName: this.uniName,
+  //       contentName: 'startupsStudents'
+  //     });
+  //   }
+  // }
 };
 </script>
 
@@ -74,10 +80,14 @@ img
   // height: 80%
   width: 100%
 
-.img1-wrap
+.img-wrap
   position: relative
   width: 18rem
   height: 5rem
+
+.img
+  max-width: 18rem
+  max-height: 8rem
 
 .img1
   width: 18rem

@@ -7,19 +7,34 @@
         Join Stratos
         <span class="primary-highlight">today</span>!
       </span>
-      <div class="error" v-if="error">{{ error.message }}</div>
-      <form @submit.prevent="pressed">
+      <div v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="(error, i) in errors" :key="i">{{ error }}</li>
+        </ul>
+      </div>
+      <form @submit.prevent="helperFunc()">
         <div class="name">
-          <input type="text" placeholder="Full Name" />
+          <input type="text" v-model="name" placeholder="Full Name" required />
         </div>
         <div class="email">
-          <input type="email" v-model="email" placeholder="Email" />
+          <input type="email" v-model="email" placeholder="Email" required />
         </div>
         <div class="password">
-          <input type="password" v-model="password" placeholder="Password" />
+          <input
+            type="password"
+            v-model="password"
+            placeholder="Password"
+            required
+          />
         </div>
         <div class="password">
-          <input type="password" placeholder="Confirm Password" />
+          <input
+            type="password"
+            v-model="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
         </div>
         <!-- <IAmA></IAmA> -->
         <button type="submit">Register</button>
@@ -39,12 +54,22 @@ export default {
   // components: { IAmA },
   data() {
     return {
-      email: '',
-      password: '',
-      error: ''
+      errors: [],
+      name: null,
+      email: null,
+      password: null,
+      confirmPassword: null
     };
   },
   methods: {
+    helperFunc() {
+      console.log('helper');
+      const passed = this.checkForm();
+      console.log(passed);
+      if (passed) {
+        this.pressed();
+      }
+    },
     async pressed() {
       try {
         const user = await firebase
@@ -57,6 +82,37 @@ export default {
       } catch (error) {
         //// console.log('error');
       }
+    },
+    checkForm() {
+      console.log('testing');
+
+      let passed = true;
+
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push('Name required.');
+        passed = false;
+      }
+      if (!this.email) {
+        this.errors.push('Email required.');
+        passed = false;
+      }
+      if (!this.password) {
+        this.errors.push('Password required.');
+        passed = false;
+      }
+      if (!this.confirmPassword) {
+        this.errors.push('Confirm Password required.');
+        passed = false;
+      }
+      if (this.password !== this.confirmPassword) {
+        this.errors.push('Passwords do not match.');
+        passed = false;
+      }
+
+      return passed;
+      e.preventDefault();
     }
   },
   mounted() {

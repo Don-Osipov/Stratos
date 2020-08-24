@@ -14,7 +14,8 @@ const client = contentful.createClient({
 export const store = new Vuex.Store({
   state: {
     universities: {},
-    teamList: []
+    teamList: [],
+    others: {}
   },
   getters: {
     getUniversities: state => {
@@ -28,6 +29,9 @@ export const store = new Vuex.Store({
     },
     getTeamList: state => {
       return state.teamList;
+    },
+    getFromOther: state => name => {
+      return state.others[name];
     }
   },
   mutations: {
@@ -48,6 +52,9 @@ export const store = new Vuex.Store({
       state.teamList = payload;
       // console.log('MUTATION');
       // console.log(state.teamList);
+    },
+    addHomepageStartups: (state, payload) => {
+      state.others.homeStartups = payload;
     }
   },
   actions: {
@@ -59,9 +66,9 @@ export const store = new Vuex.Store({
       //// console.log(contentfulData);
       // state.universities[payload.name]
       const temp = contentfulData.fields;
+      console.log(temp);
 
       let tempContent = {
-        primaryColor: '',
         uniName: payload.name,
         fullUniName: '',
         highlightColor: '',
@@ -95,30 +102,42 @@ export const store = new Vuex.Store({
         //// console.log(index + ' founderCard Set');
       }
 
-      //// console.log(tempContent);
-
-      const assets = await client.getAssets(); // API CALL
-      //// console.log(assets.items);
-      assets.items.forEach(asset => {
-        let imageURL = 'https:' + asset.fields.file.url;
-        //// console.log(imageURL);
-        if (asset.fields.description == 'UIUC Logo Image') {
-          tempContent.logoImgUrl = imageURL;
-        } else {
-          tempContent.uniImgUrl = imageURL;
-        }
-      });
-      // assets.items.map(function(asset) {
-      //   var imageURL = 'https:' + asset.fields.file.url;
-      //  // console.log(imageURL);
-      // });
-
       temp.startupsStudents.forEach((el, i) => {
         tempContent.startupsStudents[i] = el.fields.file.url;
       });
       temp.startupsAlums.forEach((el, i) => {
         tempContent.startupsAlums[i] = el.fields.file.url;
       });
+
+      tempContent.logoImgUrl = temp.uniLogo.fields.file.url;
+      tempContent.uniImgUrl = temp.uniImage.fields.file.url;
+
+      //// console.log(tempContent);
+
+      // const assets = await client.getAssets(); // API CALL
+      // console.log(assets);
+      // assets.items.forEach(asset => {
+      //   let imageURL = 'https:' + asset.fields.file.url;
+      //   //// console.log(imageURL);
+      //   if (asset.fields.description == 'UIUC Logo Image') {
+      //     tempContent.logoImgUrl = imageURL;
+      //   } else {
+      //     tempContent.uniImgUrl = imageURL;
+      //   }
+      // });
+      // // assets.items.map(function(asset) {
+      // //   var imageURL = 'https:' + asset.fields.file.url;
+      // //  // console.log(imageURL);
+      // // });
+
+      // temp.startupsStudents.forEach((el, i) => {
+      //   tempContent.startupsStudents[i] = el.fields.file.url;
+      // });
+      // temp.startupsAlums.forEach((el, i) => {
+      //   tempContent.startupsAlums[i] = el.fields.file.url;
+      // });
+      console.log('tempcontent');
+      console.log(tempContent);
 
       const content = {
         name: payload.name,
@@ -152,6 +171,19 @@ export const store = new Vuex.Store({
       return contentfulData;
       //// console.log(contentfulData);
       //// console.log(tempArr);
+    },
+    addHomepageStartups: async context => {
+      const contentfulData = await client.getEntry('4EggYFWJukxxn1zPTmEUlH');
+
+      let urlArr = [];
+
+      const graphics = contentfulData.fields.graphics;
+      graphics.forEach((el, i) => {
+        urlArr[i] = el.fields.file.url;
+      });
+
+      context.commit('addHomepageStartups', urlArr);
+      return contentfulData;
     }
   }
 });

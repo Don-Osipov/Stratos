@@ -4,20 +4,23 @@
       :bg-color="highlightColor"
       tx-color="white"
       logo-color="#ffffff"
+      transparent="not"
       class="navbar"
     ></NavBar>
 
     <main>
       <svg
-        viewBox="0 0 1440 161"
-        xmlns="http://www.w3.org/2000/svg"
         class="topwave"
+        viewBox="0 0 1440 82"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M1440 113C1279 163.227 1156 196 707.5 89.7273C329.969 0.270966 151.5 46.7727 0 138V6.10352e-05H1440V113Z"
-          :fill="highlightColor"
+          d="M1440 56.9998C1272.5 81.9998 1164 81.9998 707.5 33.7272C321.667 -7.07277 151.5 -9.22754 0 81.9998V0H1440V56.9998Z"
+          fill="#EE5239"
         />
       </svg>
+
       <h3 class="title">{{ fullUniversityName }}</h3>
       <UniversityInfo :uni-name="uniName"></UniversityInfo>
       <!-- <UniversityInfo
@@ -100,14 +103,14 @@ export default {
 <style lang="sass" scoped>
 
 @media screen and (max-width: 55em)
-  .topwave
-    display: none
+  // .topwave
+  //   display: none
   main
-    margin-top: 8rem
+    margin-top: -.1rem
 
 .navbar
   margin-bottom: 0
-  position: absolute
+  // position: absolute
   width: 100vw
 
 main

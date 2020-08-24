@@ -259,7 +259,7 @@ nav
     .line
       width: 30px
       height: 3px
-      background: $c-primarygreen
+      background: var(--logoColor)
       margin: 5px
       transition: all .3s ease-in
 

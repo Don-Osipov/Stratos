@@ -13,14 +13,14 @@
           <img src="../assets/Student.svg" alt="Student Graphic" />
           <h4>Top Five Startups From UIUC Students</h4>
         </div>
-        <Startups :uni-name="uniName"></Startups>
+        <Startups :images-arr="startupsStudents"></Startups>
       </div>
       <div class="startups-alums">
         <div class="startups-alums__title">
           <h4>Top Five Startups From UIUC Alums</h4>
           <img src="../assets/Alum.svg" alt="Student Graphic" class="alum" />
         </div>
-        <Startups :uni-name="uniName"></Startups>
+        <Startups :images-arr="startupsAlums"></Startups>
       </div>
     </div>
     <!-- <Startups></Startups> -->
@@ -39,11 +39,28 @@ export default {
       default: ''
     }
   },
+  mounted() {
+    console.log(this.startupsStudents);
+    console.log(this.startupsAlums);
+    console.log(this.$store.getters.getUniversity('UIUC'));
+  },
   computed: {
     highlightColor() {
       return this.$store.getters.getSpecificContent({
         uniName: this.uniName,
         contentName: 'highlightColor'
+      });
+    },
+    startupsStudents() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'startupsStudents'
+      });
+    },
+    startupsAlums() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'startupsAlums'
       });
     },
     cssHighlightColor() {

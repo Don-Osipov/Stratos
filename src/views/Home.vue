@@ -40,6 +40,7 @@ import LearnMoreSec from '../components/Home/LearnMoreSec';
 import TrustedBy from '../components/Home/TrustedBy';
 import WhatIsIt from '../components/Home/WhatIsIt';
 import Welcome from '../components/Home/Welcome';
+import { store } from '@/store/store.js';
 
 export default {
   name: 'Home',
@@ -53,6 +54,10 @@ export default {
   mounted() {
     document.body.classList.remove('open');
     document.documentElement.classList.remove('open');
+  },
+  async beforeRouteEnter(to, from, next) {
+    await store.dispatch('addHomepageStartups');
+    next();
   }
   // mounted() {
   //   const contentful = require('contentful');

@@ -14,7 +14,7 @@
 
     <h4>Trusted by...</h4>
     <!-- <img src="@/assets/Startups.png" alt="Startups Graphic" /> -->
-    <Startups></Startups>
+    <Startups :images-arr="images"></Startups>
   </div>
 </template>
 
@@ -23,6 +23,11 @@ import Startups from '@/components/Startups.vue';
 export default {
   components: {
     Startups
+  },
+  computed: {
+    images() {
+      return this.$store.getters.getFromOther('homeStartups');
+    }
   }
 };
 </script>

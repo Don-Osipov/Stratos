@@ -367,9 +367,11 @@ h4
 .founder
 
   &Card-wrapper
-    display: grid
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 42rem))
-    align-items: center
+    // display: grid
+    // grid-template-columns: repeat(auto-fit, minmax(20rem, 42rem))
+    display: flex
+    flex-flow: row wrap
+    // align-items: stretch
     justify-content: center
     justify-items: center
     margin-bottom: 10rem
@@ -378,16 +380,17 @@ h4
   &--card-1
     display: flex
     align-items: center
-    height: 100%
+    max-width: 35rem
+    min-height: 40rem
 
     flex-direction: column
     align-items: center
     padding: 2rem 2vw
 
-    &--2
-      @media screen and (max-width: 105em) and (min-width: 52.5em)
-        grid-column: 1 / 3
-        max-width: 43rem
+    // &--2
+    //   @media screen and (max-width: 105em) and (min-width: 52.5em)
+    //     grid-column: 1 / 3
+    //     max-width: 43rem
 
 
     &__number
