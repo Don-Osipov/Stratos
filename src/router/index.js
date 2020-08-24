@@ -12,7 +12,8 @@ import Test from '@/views/Test.vue';
 
 import Babson from '@/views/UniverisitiesList/Babson.vue';
 import Columbia from '@/views/UniverisitiesList/Columbia.vue';
-import Northwestern from '@/views/UniverisitiesList/Northwestern.vue';
+import Duke from '@/views/UniverisitiesList/Duke.vue';
+import FSU from '@/views/UniverisitiesList/FSU.vue';
 import UIUC from '@/views/UniverisitiesList/UIUC.vue';
 // INSERT OTHER UNIVERSITIES HERE
 
@@ -55,9 +56,14 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/universities/northwestern',
-    name: 'Northwestern',
-    component: Northwestern,
+    path: '/universities/duke',
+    name: 'Duke',
+    component: Duke,
+    meta: { requiresAuth: true }
+  },{
+    path: '/universities/fsu',
+    name: 'FSU',
+    component: FSU,
     meta: { requiresAuth: true }
   },
   {
