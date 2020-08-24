@@ -1,5 +1,5 @@
 <template>
-  <div class="philosophyWrapper" id="philosophyWrapper">
+  <div class="philosophyWrapper">
     <svg
       viewBox="0 0 1440 178"
       fill="none"
@@ -12,7 +12,7 @@
       />
     </svg>
 
-    <div class="interior">
+    <div class="interior" id="philosophyWrapper">
       <svg
         viewBox="0 0 589 909"
         fill="none"

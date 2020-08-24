@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="cssHighlightColor">
     <section class="info">
       <div class="top-row" id="top-row">
         <div class="fastFacts">
@@ -88,6 +88,17 @@ export default {
         uniName: this.uniName,
         contentName: 'uniImgUrl'
       });
+    },
+    highlightColor() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'highlightColor'
+      });
+    },
+    cssHighlightColor() {
+      return {
+        '--highlightColor': this.highlightColor
+      };
     }
   },
   props: {
@@ -97,10 +108,10 @@ export default {
     }
   }
   // mounted() {
-  //   console.log(this.logoImageUrl);
-  //   console.log(this.uniImageUrl);
-  //   console.log('TESTING');
-  //   console.log(
+  //  // console.log(this.logoImageUrl);
+  //  // console.log(this.uniImageUrl);
+  //  // console.log('TESTING');
+  //  // console.log(
   //     this.$store.getters.getSpecificContent({
   //       uniName: this.uniName,
   //       contentName: 'logoImgUrl'
@@ -115,33 +126,33 @@ export default {
   //     })
   //   };
   // created() {
-  // console.log(
+  //// console.log(
   //   this.$store.getters.getSpecificContent({
   //     uniName: 'UIUC',
   //     contentName: 'fastFacts'
   //   })
   // );
-  // console.log(this.$store.state.universities);
-  // console.log(this.$store.state.universities.UIUC.fastFacts);
-  // console.log(this.$store.state.universities);
-  // console.log(this.$store.state.universities['UIUC']);
-  // console.log(this.$store.getters.test);
-  // console.log(this.funFacts);
+  //// console.log(this.$store.state.universities);
+  //// console.log(this.$store.state.universities.UIUC.fastFacts);
+  //// console.log(this.$store.state.universities);
+  //// console.log(this.$store.state.universities['UIUC']);
+  //// console.log(this.$store.getters.test);
+  //// console.log(this.funFacts);
   // }
 
   // created() {
-  //   // console.log(this.$store.getters.getUniversity('UIUC'));
-  //   console.log(this.$store.getters.getUniversities);
+  //   //// console.log(this.$store.getters.getUniversity('UIUC'));
+  //  // console.log(this.$store.getters.getUniversities);
   // }
   // methods: {
   //   test() {
-  //     // console.log(this.fastFacts);
-  //     // console.log(this.opportunitiesText);
+  //     //// console.log(this.fastFacts);
+  //     //// console.log(this.opportunitiesText);
   //   }
   // }
   // mounted() {
   //   // this.limitFunc();
-  //   console.log(this.fastFacts);
+  //  // console.log(this.fastFacts);
   // }
   // data() {
   //   return {
@@ -221,7 +232,7 @@ export default {
 
 
   & h4
-    color: $c-UIUCOrange
+    color: var(--highlightColor)
     font-size: 4rem
     line-height: 5rem
     margin-bottom: 1.5rem
@@ -264,7 +275,7 @@ export default {
 
 
 h4
-  color: $c-UIUCOrange
+  color: var(--highlightColor)
   font-size: 5rem
 
 p

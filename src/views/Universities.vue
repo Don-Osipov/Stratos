@@ -57,3 +57,8 @@ export default {
 .bot-wave
   margin-bottom: -1rem
 </style>
+
+<style lang="sass">
+.university-location
+  max-height: 45rem
+</style>

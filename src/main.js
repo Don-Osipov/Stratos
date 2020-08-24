@@ -13,22 +13,22 @@ import { store } from './store/store';
 
 // client.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
 // logs the entry metadata
-// console.log(entry.sys);
+//// console.log(entry.sys);
 // logs the field with ID title
-// console.log(entry.fields);
+//// console.log(entry.fields);
 // });
 
 // client
 //   .getAssets()
 //   .then(function(assets) {
-//     console.log(assets);
+//    // console.log(assets);
 //     assets.items.map(function(asset) {
 //       var imageURL = 'https:' + asset.fields.file.url;
-//       console.log(imageURL);
+//      // console.log(imageURL);
 //     });
 //   })
 //   .catch(function(e) {
-//     console.log(e);
+//    // console.log(e);
 //   });
 
 // const firebaseConfig = {
@@ -55,7 +55,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-Vue.prototype.$firebaseTest = firebase;
+Vue.prototype.$firestore = firebase.firestore();
 
 // Vue.prototype.$universities = store.state.universities
 // sm
@@ -74,7 +74,7 @@ Vue.component('Footer', Footer);
 
 let app;
 firebase.auth().onAuthStateChanged(user => {
-  // console.log(user);
+  //// console.log(user);
   if (!app) {
     app = new Vue({
       router,

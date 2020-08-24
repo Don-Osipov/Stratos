@@ -4,10 +4,16 @@ import Home from '@/views/Home.vue';
 import Product from '@/views/Product.vue';
 import Team from '@/views/Team.vue';
 import Universities from '@/views/Universities.vue';
-import UIUC from '@/views/UniverisitiesList/UIUC.vue';
 import Contact from '@/views/Contact.vue';
 import LogIn from '@/views/LogIn.vue';
 import Register from '@/views/Register.vue';
+import PrivacyPolicy from '@/views/PrivacyPolicy.vue';
+import Test from '@/views/Test.vue';
+
+import UIUC from '@/views/UniverisitiesList/UIUC.vue';
+import Columbia from '@/views/UniverisitiesList/Columbia.vue';
+import Northwestern from '@/views/UniverisitiesList/Northwestern.vue';
+// INSERT OTHER UNIVERSITIES HERE
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -19,6 +25,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   },
   {
     path: '/product',
@@ -33,9 +44,21 @@ const routes = [
   {
     path: '/universities/uiuc',
     name: 'UIUC',
-    component: UIUC,
+    component: UIUC
+  },
+  {
+    path: '/universities/columbia',
+    name: 'Columbia',
+    component: Columbia,
     meta: { requiresAuth: true }
   },
+  {
+    path: '/universities/northwestern',
+    name: 'Northwestern',
+    component: Northwestern,
+    meta: { requiresAuth: true }
+  },
+
   {
     path: '/universities',
     name: 'Universities',
@@ -56,12 +79,20 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/privacypolicy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy
   }
 ];
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
 });
 
 router.beforeEach((to, from, next) => {

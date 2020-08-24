@@ -1,40 +1,43 @@
 <template>
   <div class="startupWrapper">
     <div class="img1-wrap">
-      <img src="@/assets/Startups/accenture.png" alt="Accenture" class="img1" />
+      <img :src="images[0]" alt="Accenture" class="img1" />
     </div>
     <div>
-      <img
-        src="@/assets/Startups/gsvVentures.png"
-        alt="GSV-Ventures"
-        class="img2"
-      />
+      <img :src="images[1]" alt="GSV-Ventures" class="img2" />
     </div>
     <div>
-      <img src="@/assets/Startups/DNcap.jpg" alt="DNcap" class="img3" />
+      <img :src="images[2]" alt="DNcap" class="img3" />
     </div>
     <div>
-      <img src="@/assets/Startups/cydan.jpg" alt="Cydan" class="img4" />
+      <img :src="images[3]" alt="Cydan" class="img4" />
     </div>
     <div class="img5-wrap">
-      <img
-        src="@/assets/Startups/sriCapital.jpg"
-        alt="SRI Capital"
-        class="img5"
-      />
+      <img :src="images[4]" alt="SRI Capital" class="img5" />
     </div>
     <div>
-      <img
-        src="@/assets/Startups/midwayVentures.jpeg"
-        alt="Midway Ventures"
-        class="img6"
-      />
+      <img :src="images[5]" alt="Midway Ventures" class="img6" />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    uniName: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    images() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'startupsStudents'
+      });
+    }
+  }
+};
 </script>
 
 <style lang="sass" scoped>

@@ -1,7 +1,7 @@
 <template>
-  <div class="UIUC">
+  <div class="UIUC" :style="cssHighlightColor">
     <NavBar
-      bg-color="#EE5239"
+      :bg-color="highlightColor"
       tx-color="white"
       logo-color="#ffffff"
       class="navbar"
@@ -15,7 +15,7 @@
       >
         <path
           d="M1440 113C1279 163.227 1156 196 707.5 89.7273C329.969 0.270966 151.5 46.7727 0 138V6.10352e-05H1440V113Z"
-          fill="#EE5239"
+          :fill="highlightColor"
         />
       </svg>
       <h3 class="title">{{ fullUniversityName }}</h3>
@@ -38,12 +38,12 @@
       >
         <path
           d="M1440 0C1440 0 1129.5 60.8631 771 26.1824C412.5 -8.49835 201.684 -12.3628 0 37.8173V94.5H1440L1440 0Z"
-          fill="#EE5239"
+          :fill="highlightColor"
         />
       </svg>
     </main>
 
-    <Footer bg-color="#EE5239" logo-color="white"></Footer>
+    <Footer :bg-color="highlightColor" logo-color="white"></Footer>
   </div>
 </template>
 
@@ -60,28 +60,12 @@ export default {
     };
   },
   async beforeRouteEnter(to, from, next) {
-    // console.log(to);
-    // console.log(from);
-    // console.log(next);
-
     await store.dispatch('addUniversity', {
       name: 'UIUC', // THIS NEEDS TO BE CHANGED
       contentfulID: '7H5uEmao3VFYiKeeiUtw9D' // THIS NEEDS TO BE CHANGED
-      // content: {
-      //   primaryColor: '',
-      //   uniName: '',
-      //   fastFacts: [],
-      //   logoImgUrl: '',
-      //   uniImgUrl: '',
-      //   opportunitiesForVC: [],
-      //   founderCards: []
-      // }
     });
     next();
   },
-  // data() {
-  //   return {};
-  // },
   components: {
     UniversityInfo,
     FounderRanking,
@@ -93,45 +77,23 @@ export default {
         uniName: this.uniName,
         contentName: 'fullUniName'
       });
+    },
+    highlightColor() {
+      return this.$store.getters.getSpecificContent({
+        uniName: this.uniName,
+        contentName: 'highlightColor'
+      });
+    },
+    cssHighlightColor() {
+      return {
+        '--highlightColor': this.highlightColor
+      };
     }
   },
   created() {
     document.body.classList.remove('open');
     document.documentElement.classList.remove('open');
-
-    // this.$content.getEntry('7H5uEmao3VFYiKeeiUtw9D').then(entry => {
-    //   console.log(entry);
-    //   // logs the entry metadata
-    //   // console.log(entry.sys);
-    //
-    //   // logs the field with ID titl
-    //   //
-
-    //   // // console.log(this.opportunitiesForVC);
-    //   // // console.log(temp);
-
-    // });
   }
-  // created() {
-  //   console.log(this.$content);
-  // this.$content
-  //   .getAssets()
-  //   .then(function(assets) {
-  //     // console.log(assets);
-  //     assets.items.forEach((asset, index) => {
-  //       let imageURL = 'https:' + asset.fields.file.url;
-  //       // console.log(imageURL);
-  //     });
-  //     // assets.items.map(function(asset) {
-  //     //   var imageURL = 'https:' + asset.fields.file.url;
-  //     //   console.log(imageURL);
-  //     // });
-  //   })
-  //   .catch(function(e) {
-  //     // console.log(e);
-  //   });
-  //   // console.log(this.founderCards);
-  // }
 };
 </script>
 
@@ -170,7 +132,7 @@ main
 
 .title
   font-size: 8rem
-  color: $c-UIUCOrange
+  color: var(--highlightColor)
 
   @media screen and (max-width: 65.5em)
     font-size: 4.8rem
@@ -178,6 +140,6 @@ main
 
 
 .wave2
-  background: linear-gradient(white, white 95%, $c-UIUCOrange 95%)
+  background: linear-gradient(white, white 95%, var(--highlightColor) 95%)
   margin-bottom: -1rem
 </style>

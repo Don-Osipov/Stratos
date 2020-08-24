@@ -27,14 +27,15 @@
       <li>
         <router-link to="/universities">Universities</router-link>
       </li>
-      <li>
-        <router-link to="/universities/uiuc">UIUC</router-link>
-      </li>
+
       <li>
         <router-link to="/contact">Contact</router-link>
       </li>
-      <li>
+      <li v-if="!loggedIn">
         <router-link to="/login">Log In</router-link>
+      </li>
+      <li v-else>
+        <a href="#" @click.prevent="signOut">Sign Out</a>
       </li>
     </ul>
     <div class="hamburger">
@@ -46,11 +47,15 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default {
   data() {
     return {
       path: this.$router.currentRoute.path,
-      routeList: this.$router.options.routes
+      routeList: this.$router.options.routes,
+      loggedIn: false
     };
   },
   props: {
@@ -91,14 +96,14 @@ export default {
     nextPage() {
       const path = this.path;
       const routeList = this.routeList;
-      // console.log(path);
-      // console.log(routeList);
+      //// console.log(path);
+      //// console.log(routeList);
       let pathIndex;
       for (let i = 0; i < routeList.length; i++) {
         const el = routeList[i].path;
         if (path == el) pathIndex = i;
       }
-      console.log(pathIndex);
+      //// console.log(pathIndex);
       if (pathIndex === routeList.length - 1) return 0;
       return pathIndex + 1;
     }
@@ -132,6 +137,13 @@ export default {
       else if (g < 0) g = 0;
 
       return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+    },
+    async signOut() {
+      try {
+        const data = await firebase.auth().signOut();
+      } catch (error) {
+        //// console.log(error);
+      }
     }
   },
   mounted() {
@@ -139,10 +151,10 @@ export default {
     const line = document.querySelectorAll('.line');
     const navLinks = document.querySelector('.nav__links');
     // const links = document.querySelectorAll('.nav__links li');
-    // console.log(this.$router.currentRoute.path);
-    // console.log(this.$router.options.routes);
-    // console.log(this.nextPage);
-    // console.log(this.routeList[this.nextPage]);
+    //// console.log(this.$router.currentRoute.path);
+    //// console.log(this.$router.options.routes);
+    //// console.log(this.nextPage);
+    //// console.log(this.routeList[this.nextPage]);
 
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('open');
@@ -151,6 +163,15 @@ export default {
       });
       document.body.classList.toggle('open');
       document.documentElement.classList.toggle('open');
+    });
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
     });
   }
 };

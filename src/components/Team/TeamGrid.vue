@@ -13,23 +13,18 @@
     </svg>
 
     <div class="TG">
-      <div class="TG--card" v-for="(item, i) in arr" :key="i">
+      <div class="TG--card" v-for="(item, i) in teamList" :key="i">
         <div class="TG--card__head">
-          <p class="name"><span>Jason</span> <span>Tan</span></p>
+          <p class="name">{{ item.name }}</p>
           <img
-            src="../../assets/Team/TeamImage.png"
-            alt="Jason Tan Image"
+            :src="item.picture"
+            alt="Picture of Team Member"
             class="picture"
           />
         </div>
         <div class="TG--card__info">
-          <h5 class="title">Co-Founder, CTO</h5>
-          <p class="info">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-            accusantium reprehenderit quod doloribus dolorem adipisci a quasi
-            nostrum vel commodi. At voluptatum soluta, libero aperiam earum
-            labore adipisci asperiores debitis.
-          </p>
+          <h5 class="title">{{ item.position }}</h5>
+          <p class="info">{{ item.description }}</p>
         </div>
       </div>
     </div>
@@ -42,6 +37,11 @@ export default {
     return {
       arr: new Array(12)
     };
+  },
+  computed: {
+    teamList() {
+      return this.$store.getters.getTeamList;
+    }
   }
 };
 </script>
@@ -61,18 +61,20 @@ export default {
   padding: 0 12.5vw
   padding-bottom: 3rem
 
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 40rem))
+  align-items: start
+  justify-content: center
+
   @media screen and (max-width: 62.5em)
     padding: 0 5vw
     padding-bottom: 3rem
 
-  display: grid
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 40rem))
-  align-items: center
-  justify-content: center
 
 
   &--card
     padding: 4rem 2.5vw
+
 
     &__head
       margin-bottom: 1rem
@@ -104,6 +106,7 @@ export default {
 
 
 .picture
+  width: 100%
 
 
 .title

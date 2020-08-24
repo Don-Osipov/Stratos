@@ -111,6 +111,13 @@ import SendMessage from '@/components/ContactUs/SendMessage.vue';
 export default {
   components: {
     SendMessage
+  },
+  mounted() {
+    let kwesScript = document.createElement('script');
+
+    kwesScript.setAttribute('src', 'https://kwes.io/js/kwes.js');
+
+    document.head.appendChild(kwesScript);
   }
 };
 </script>

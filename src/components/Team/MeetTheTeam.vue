@@ -22,11 +22,11 @@ export default {};
 .MTT
   margin-bottom: 7rem
   color: $c-darkblue
-  padding: 0 12.5vw
+  padding: 7.5rem 12.5vw
   width: 100vw
 
   @media screen and (max-width: 50em)
-    padding: 0 5vw
+    padding: 7.5rem 5vw
 
 
   &--title

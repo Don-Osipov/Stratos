@@ -191,7 +191,7 @@
         it out today!
       </p>
     </div>
-    <router-link to="/universities">
+    <router-link to="/universities/uiuc">
       <button>Take me to the free university!</button>
     </router-link>
   </div>

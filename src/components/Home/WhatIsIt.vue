@@ -12,7 +12,7 @@
         transform="translate(0-1977)"
       ></path>
     </svg>-->
-    <svg
+    <!-- <svg
       xmlns="http://www.w3.org/2000/svg"
       class="curve-container__curve"
       viewBox="0 0 1440 179"
@@ -22,7 +22,7 @@
         d="M0 99.7422C0 99.7422 230.5 246.895 664.58 100.597C998 -34.223 1238.32 -28.977 1440 89.1182V179H0L0 99.7422Z"
         fill="#46C894"
       />
-    </svg>
+    </svg>-->
 
     <div class="content-wrapper">
       <img src="@/assets/LargeIcon.svg" alt="Large Stratos Icon" />
@@ -54,12 +54,13 @@ export default {};
   margin-bottom: -.1rem
 
 .content-wrapper
+  margin-top: -1rem
   display: grid
-  grid-template-columns: auto 1fr
+  grid-template-columns: 1fr  1.4fr
   justify-items: center
   align-items: center
   padding: 0 12.5vw
-  padding-bottom: 4rem
+  padding-bottom: 2.5rem
 
   @media screen and (max-width: 60em)
     padding: 0 5vw
@@ -85,13 +86,13 @@ export default {};
     padding-top: 3rem
 
   & h3
-    font-size: 7rem
+    font-size: 8rem
     line-height: 1
     margin-bottom: 3.5rem
 
   & p
     font-weight: 500
-    font-size: 1.8rem
+    font-size: 2rem
 
 img
   max-height: 50rem

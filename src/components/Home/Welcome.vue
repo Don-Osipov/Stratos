@@ -1,5 +1,6 @@
 <template>
   <div class="landing">
+    <!-- <img src="@/assets/CloudandRocket.svg" class="test" /> -->
     <div class="intro">
       <h2>
         Welcome to
@@ -10,7 +11,7 @@
         <span class="primary-highlight">startup discovery</span> one univeristy
         at a time
       </h3>
-      <a href="#WII-wrapper" class=".scrollLink" v-smooth-scroll>
+      <a href="#WII-wave-top" class=".scrollLink" v-smooth-scroll>
         <span class="learn">Learn More</span>
       </a>
     </div>
@@ -27,39 +28,50 @@ export default {};
 
 <style lang="sass" scoped>
 
+.test
+  width: 60rem
+  bottom: 0%
+  left: 0%
+  position: absolute
+
 .landing
   // height:  55vh
-  display: grid
-  grid-template-columns: 1fr
-  width: 100vw
+  // display: grid
+  // grid-template-columns: 1fr
+  // width: 100vw
   margin-bottom: -.1rem // gets rid of random line between the 2 elements
-  max-width: 60rem
+  max-width: 70rem
+  margin-right: auto
+  // position: relative
 
 
 
   & .intro
     color: white
     margin: 6rem 0
-    margin-right: auto
-    padding: 0 10vw
+    // margin-right: auto
+    padding-left: 10vw
     text-align: start
     display: flex
     flex-direction: column
 
     & h2
-      font-size: 8.5rem
-      line-height: 7.5rem
+      font-size: 9.5rem
+      line-height: 9rem
       margin-bottom: 3.5rem
 
+      @media screen and (max-width: 31.25em)
+        line-height: 6rem
+
     & h3
-      font-size: 3rem
-      line-height: 3.4rem
+      font-size: 3.5rem
+      line-height: 4rem
       margin-bottom: 5rem
 
 
     & a
-      padding: .75rem 2.5rem
-      border-radius: 3rem
+      padding: 1.25rem 3.5rem
+      border-radius: 10rem
       background-color: $c-primarygreen
       cursor: pointer
       transition: all .3s ease 0s
@@ -72,7 +84,7 @@ export default {};
 
       & span
         color: white
-        font-size: 2rem
+        font-size: 2.5rem
 
   & .graphic
 

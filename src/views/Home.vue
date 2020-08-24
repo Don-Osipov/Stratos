@@ -4,9 +4,24 @@
     <NavBar bg-color="#103f4a" transparent="not"></NavBar>
     <main>
       <header>
-        <Welcome></Welcome>
+        <div class="wrapper">
+          <Welcome></Welcome>
+          <img src="@/assets/CloudandRocket.svg" class="test" />
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="curve-container__curve"
+          viewBox="0 0 1440 179"
+          enable-background="new 0 0 1440 179"
+          id="WII-wave-top"
+        >
+          <path
+            d="M0 99.7422C0 99.7422 230.5 246.895 664.58 100.597C998 -34.223 1238.32 -28.977 1440 89.1182V179H0L0 99.7422Z"
+            fill="#46C894"
+          />
+        </svg>
       </header>
-      <WhatIsIt></WhatIsIt>
+      <WhatIsIt class="test2"></WhatIsIt>
       <HowItWorks></HowItWorks>
       <LearnMoreSec></LearnMoreSec>
       <TrustedBy></TrustedBy>
@@ -50,17 +65,50 @@ export default {
   //   // This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
   //   client
   //     .getEntry('5PeGS2SoZGSa4GuiQsigQu')
-  //     .then(entry => console.log(entry))
-  //     .catch(err => console.log(err));
+  //     .then(entry =>// console.log(entry))
+  //     .catch(err =>// console.log(err));
   // }
 };
 </script>
 
 <style lang="sass" scoped>
+.test
+  width: 85%
+  // justify-self: center
+  transform: translateY(5rem)
+  // z-index:
+
+  @media screen and (max-width: 92.5em)
+    transform: translateY(10rem)
+
+  @media screen and (max-width: 71.875em)
+    display: none
+
+.test2
+  // z-index: 10
+
+.curve-container__curve
+  // z-index: 15
+  margin-bottom: -2rem
+  margin-top: -8rem
+  z-index: 20
+  position: relative
+  // margin-top:
+
 .home
   display: grid
   grid-template-rows: auto 1fr auto
 
 header
   background-color: $c-darkblue
+  position: relative
+  // z-index: -10
+.wrapper
+  display: grid
+  grid-template-columns: 5fr 4fr
+  z-index: -5
+
+  @media screen and (max-width: 71.875em)
+    display: inline-block
+    width: 100%
 </style>

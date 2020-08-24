@@ -1,8 +1,13 @@
 <template>
   <div class="wrap">
-    <svg viewBox="0 0 1440 206" xmlns="http://www.w3.org/2000/svg" class="wave">
+    <svg
+      class="wave"
+      viewBox="0 0 1440 91"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
-        d="M1440 99.7422C1440 99.7422 1209.5 246.895 775.42 100.597C442 -34.223 201.684 -28.977 0 89.1182V206H1440L1440 99.7422Z"
+        d="M1440 54.0001C1440 54.0001 1130.5 127.298 775.42 46C467.5 -24.5002 297 -10.9996 0 69.0008V90.4722H1440V54.0001Z"
         fill="white"
       />
     </svg>
@@ -180,7 +185,7 @@ export default {};
     padding: 3rem 5vw
 
 .wave
-  background-color: $c-midblue
+  background: linear-gradient($c-midblue, $c-midblue 98%, white 98%)
 
 .dontSee
   & h4

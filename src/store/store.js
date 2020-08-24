@@ -13,7 +13,8 @@ const client = contentful.createClient({
 
 export const store = new Vuex.Store({
   state: {
-    universities: {}
+    universities: {},
+    teamList: []
   },
   getters: {
     getUniversities: state => {
@@ -25,30 +26,37 @@ export const store = new Vuex.Store({
     getSpecificContent: state => payload => {
       return state.universities[payload.uniName][payload.contentName];
     },
-    test: state => {
-      return state.universities.UIUC.fastFacts;
+    getTeamList: state => {
+      return state.teamList;
     }
   },
   mutations: {
     addUniversity: (state, payload) => {
       // state.universities[payload.name] = payload.content;
-      // console.log(payload);
+      //// console.log(payload);
       state.universities[payload.name] = payload.content;
-      // console.log('mutations');
-      // console.log(payload);
+      //// console.log('mutations');
+      //// console.log(payload);
     },
     changeContent: (state, payload) => {
       const nameOfUni = payload.name;
       const contentToChange = payload.contentName;
       const newContent = payload.content;
       state.universities[nameOfUni][contentToChange] = newContent;
+    },
+    addTeamList: (state, payload) => {
+      state.teamList = payload;
+      // console.log('MUTATION');
+      // console.log(state.teamList);
     }
   },
   actions: {
     addUniversity: async (context, payload) => {
       const contentfulData = await client.getEntry(payload.contentfulID); // API CALL
 
-      console.log(contentfulData);
+      // console.log(contentfulData);
+
+      //// console.log(contentfulData);
       // state.universities[payload.name]
       const temp = contentfulData.fields;
 
@@ -56,16 +64,21 @@ export const store = new Vuex.Store({
         primaryColor: '',
         uniName: payload.name,
         fullUniName: '',
+        highlightColor: '',
         fastFacts: [],
         logoImgUrl: '',
         uniImgUrl: '',
         opportunitiesForVC: [],
-        founderCards: []
+        founderCards: [],
+        startupsStudents: [],
+        startupsAlums: []
       };
+
       tempContent.fullUniName = temp.fullUniversityName;
+      tempContent.highlightColor = temp.highlightColor;
       temp.funFactsText.split('\n\n').forEach((el, i) => {
         tempContent.fastFacts[i] = el;
-        // console.log(el);
+        //// console.log(el);
       });
       temp.opportunitiesForVCsText.split('\n\n').forEach((el, i) => {
         tempContent.opportunitiesForVC[i] = el;
@@ -79,16 +92,16 @@ export const store = new Vuex.Store({
         const el = temp.founderCards.fields.cards[index];
         const entry = await client.getEntry(el.sys.id); // API CALL
         tempContent.founderCards[index] = entry.fields;
-        console.log(index + ' founderCard Set');
+        //// console.log(index + ' founderCard Set');
       }
 
-      console.log(tempContent);
+      //// console.log(tempContent);
 
       const assets = await client.getAssets(); // API CALL
-      console.log(assets.items);
+      //// console.log(assets.items);
       assets.items.forEach(asset => {
         let imageURL = 'https:' + asset.fields.file.url;
-        console.log(imageURL);
+        //// console.log(imageURL);
         if (asset.fields.description == 'UIUC Logo Image') {
           tempContent.logoImgUrl = imageURL;
         } else {
@@ -97,20 +110,48 @@ export const store = new Vuex.Store({
       });
       // assets.items.map(function(asset) {
       //   var imageURL = 'https:' + asset.fields.file.url;
-      //   console.log(imageURL);
+      //  // console.log(imageURL);
       // });
+
+      temp.startupsStudents.forEach((el, i) => {
+        tempContent.startupsStudents[i] = el.fields.file.url;
+      });
+      temp.startupsAlums.forEach((el, i) => {
+        tempContent.startupsAlums[i] = el.fields.file.url;
+      });
 
       const content = {
         name: payload.name,
         content: tempContent
       };
-      console.log('TEMP');
-      console.log(tempContent);
+
+      // console.log(tempContent);
+      //// console.log('TEMP');
+      //// console.log(tempContent);
       context.commit('addUniversity', content);
       return contentfulData;
       // state.universities[payload.name] = payload.content;
-      // console.log('mutations');
-      // console.log(payload);
+      //// console.log('mutations');
+      //// console.log(payload);
+    },
+    addTeamList: async context => {
+      const contentfulData = await client.getEntry('1SuGYUKHSosI518LO4Qod7');
+
+      const fields = contentfulData.fields;
+
+      let tempArr = [];
+
+      for (let i = 0; i < fields.teamList.length; i++) {
+        let temp = fields.teamList[i].fields;
+        temp.picture = fields.teamList[i].fields.picture.fields.file.url;
+
+        tempArr[i] = temp;
+      }
+
+      context.commit('addTeamList', tempArr);
+      return contentfulData;
+      //// console.log(contentfulData);
+      //// console.log(tempArr);
     }
   }
 });

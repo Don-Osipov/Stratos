@@ -1,8 +1,12 @@
 <template>
   <div class="wrapper">
-    <form @submit="saveContactMessage">
+    <!-- <form
+      method="POST"
+      action="https://kwes.io/api/foreign/forms/BHmjbr91j8vbClxX6HuT"
+    >-->
+    <form action="https://submit-form.com/qu6845WqcBzo9-NaTYLno" target="_self">
       <h4>Send us a message</h4>
-      <div class="radioButton-wrap">
+      <!-- <div class="radioButton-wrap">
         <p>I'm a</p>
         <input type="radio" id="student" class="student" name="same" />
         <label for="student">Student</label>
@@ -12,28 +16,21 @@
 
         <input type="radio" id="other" class="other" name="same" />
         <label for="other">Other</label>
-      </div>
+      </div>-->
+      <!-- <IAmA></IAmA> -->
       <div class="inputs">
         <input
-          v-model="fName"
-          name="fName"
+          v-model="fullName"
+          name="fullName"
           type="text"
           autocomplete="off"
-          class="fName"
-          placeholder="First Name"
-          required
-        />
-        <input
-          v-model="lName"
-          name="lName"
-          type="text"
-          autocomplete="off"
-          class="lName"
-          placeholder="Last Name"
+          class="fullName"
+          placeholder="Full Name"
           required
         />
         <input
           v-model="email"
+          name="email"
           type="email"
           autocomplete="off"
           class="email"
@@ -42,6 +39,7 @@
         />
         <textarea
           v-model="message"
+          name="message"
           type="text"
           autocomplete="off"
           class="message"
@@ -55,35 +53,51 @@
 </template>
 
 <script>
+// import IAmA from '@/components/IAmA.vue';
 export default {
   data() {
     return {
-      fName: null,
-      lName: null,
+      fullName: null,
       email: null,
       message: null
     };
   },
+  // components: {
+  //   IAmA
+  // },
   methods: {
     saveContactMessage: function(e) {
       e.preventDefault();
-      console.log('SUBMITTED');
-      console.log(this.fName);
-      console.log(this.lName);
-      console.log(this.email);
-      console.log(this.message);
-      // console.log(this.$firebaseTest.firestore());
-      const messagesRef = this.$firebaseTest.firestore.collection('message');
-      console.log(messagesRef);
-      messagesRef.add({
-        fName: this.fName,
-        lName: this.lName,
-        email: this.email,
-        message: this.message,
-        time: new Date()
-      });
-      this.fName = '';
-      this.lName = '';
+      //// console.log('SUBMITTED');
+      //// console.log(this.fullName);
+      //// console.log(this.email);
+      //// console.log(this.message);
+      //// console.log(this.$firestore);
+      const db = this.$firestore.collection('contactData');
+      db.doc()
+        .set({
+          fullName: this.fullName,
+          email: this.email,
+          message: this.message
+        })
+        .then(() => {
+          //// console.log('Data Saved');
+        })
+        .catch(error => {
+          //// console.log(error);
+        });
+      //// console.log(db);
+      //// console.log(this.$firebaseTest.firestore());
+      // const messagesRef = this.$firebaseTest.firestore.collection('message');
+      //// console.log(messagesRef);
+      // messagesRef.add({
+      //   fName: this.fName,
+      //   lName: this.lName,
+      //   email: this.email,
+      //   message: this.message,
+      //   time: new Date()
+      // });
+      this.fullName = '';
       this.email = '';
       this.message = '';
       this.submitted = true;
@@ -107,17 +121,21 @@ input:-webkit-autofill
   @media screen and (max-width: 75em)
     padding-left: 0
 
+
 form
 
   & h4
     font-size: 4rem
     color: $c-primarygreen
+    line-height: 4.5rem
+    padding: 3rem 0
 
   & .radioButton-wrap
     display: grid
     align-items: center
     grid-template-columns: 7.5rem 1fr 1fr 1fr
     margin-bottom: 2rem
+
 
     & input
       opacity: 0
@@ -153,6 +171,7 @@ form
   & .inputs
     display: flex
     flex-direction: column
+    overflow: hidden
 
 
     & input, textarea
@@ -178,6 +197,14 @@ form
         font-family: 'Montserrat'
 
     & .message
+      height: 25rem
+      overflow: scroll
+      -ms-overflow-style: none
+      scrollbar-width: none
+
+      &::-webkit-scrollbar
+        display: none
+
 
 
   & button
@@ -194,4 +221,36 @@ form
 
     &:hover
       color: lighten($c-primarygreen, 10)
+
+      @media screen and (max-width: 83.75em)
+        color: white
+        background-color: lighten($c-primarygreen, 10)
+
+    @media screen and (max-width: 83.75em)
+      background-color: $c-primarygreen
+      color: white
+
+
+
+
+// @media screen and (max-width: 26.25em)
+//   h4
+//     padding-bottom: 1rem !important
+//     font-size: 4.5rem !important
+//     line-height: 5rem !important
+
+//   .radioButton-wrap
+//     grid-template-rows: 1fr 1fr
+//     grid-template-columns: 1fr 1fr 1fr !important
+
+//     & p
+//       grid-row: 1 / 2
+//       grid-column: 1/ 4
+//       font-size: 2rem
+
+//     & input, label
+//       grid-row: 2 / 3
+
+//     & label
+//       margin: 0 .5rem !important
 </style>

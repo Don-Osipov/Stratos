@@ -23,6 +23,8 @@ import Creators from '../components/Team/Creators';
 import TeamGrid from '../components/Team/TeamGrid';
 import TalkToTeam from '../components/Team/TalkToTeam';
 import Partners from '../components/Team/Partners';
+import { store } from '@/store/store.js';
+
 export default {
   name: 'Team',
   components: {
@@ -35,6 +37,10 @@ export default {
   mounted() {
     document.body.classList.remove('open');
     document.documentElement.classList.remove('open');
+  },
+  async beforeRouteEnter(to, from, next) {
+    await store.dispatch('addTeamList');
+    next();
   }
 };
 </script>

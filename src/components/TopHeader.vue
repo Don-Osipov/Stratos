@@ -23,9 +23,9 @@ export default {
     async signOut() {
       try {
         const data = await firebase.auth().signOut();
-        console.log(data);
+        // console.log(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
   },
