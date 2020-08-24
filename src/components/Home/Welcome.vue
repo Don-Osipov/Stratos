@@ -8,8 +8,7 @@
       </h2>
       <h3>
         Redefining
-        <span class="primary-highlight">startup discovery</span> one univeristy
-        at a time
+        <span class="primary-highlight">startup discovery</span>
       </h3>
       <a href="#WII-wave-top" class=".scrollLink" v-smooth-scroll>
         <span class="learn">Learn More</span>
