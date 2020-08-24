@@ -191,8 +191,8 @@
         it out today!
       </p>
     </div>
-    <router-link to="/universities/uiuc">
-      <button>Take me to the free university!</button>
+    <router-link to="/universities/babson">
+      <button>Discover Babson</button>
     </router-link>
   </div>
 </template>
