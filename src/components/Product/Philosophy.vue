@@ -1058,7 +1058,7 @@
       </svg>
       <div class="info">
         <h4>Our Philosophy</h4>
-        <p>Here at Stratos, we’re redefining startup discovery.</p>
+        <p>Here at Stratos, we’re <b>redefining startup discovery</b>.</p>
         <p>
           Stratos exists as a Princeton TigerLaunch project. TigerLaunch is the
           world’s largest student-run entrepreneurship competition, and we are

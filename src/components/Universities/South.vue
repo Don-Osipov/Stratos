@@ -21,8 +21,16 @@
 
       <ul class="list">
         <li>Arizona State University</li>
-        <li>Duke University</li>
-        <li>Florida State University</li>
+        <li>
+          <router-link to="/universities/duke"
+            >Duke University</router-link
+          >
+        </li>
+        <li>
+          <router-link to="/universities/fsu"
+            >Florida State University</router-link
+          >
+        </li>
         <li>Georgia Institute of Technology</li>
         <li>Johns Hopkins University</li>
         <li>Rice University</li>
