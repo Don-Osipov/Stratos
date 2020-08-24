@@ -10,9 +10,10 @@ import Register from '@/views/Register.vue';
 import PrivacyPolicy from '@/views/PrivacyPolicy.vue';
 import Test from '@/views/Test.vue';
 
-import UIUC from '@/views/UniverisitiesList/UIUC.vue';
+import Babson from '@/views/UniverisitiesList/Babson.vue';
 import Columbia from '@/views/UniverisitiesList/Columbia.vue';
 import Northwestern from '@/views/UniverisitiesList/Northwestern.vue';
+import UIUC from '@/views/UniverisitiesList/UIUC.vue';
 // INSERT OTHER UNIVERSITIES HERE
 
 import * as firebase from 'firebase/app';
@@ -42,9 +43,10 @@ const routes = [
     component: Team
   },
   {
-    path: '/universities/uiuc',
-    name: 'UIUC',
-    component: UIUC
+    path: '/universities/babson',
+    name: 'Babson',
+    component: Babson,
+    meta: { requiresAuth: true }
   },
   {
     path: '/universities/columbia',
@@ -58,7 +60,11 @@ const routes = [
     component: Northwestern,
     meta: { requiresAuth: true }
   },
-
+  {
+    path: '/universities/uiuc',
+    name: 'UIUC',
+    component: UIUC
+  },
   {
     path: '/universities',
     name: 'Universities',
