@@ -16,13 +16,13 @@
     <div class="interior">
       <ul class="list">
         <li>Michigan State University</li>
+        <li>University of Chicago</li>
+        <li>University of Michigan</li>
         <li>
-          <router-link to="/universities/northwestern"
-            >University of Chicago</router-link
+          <router-link to="/universities/uiuc"
+            >UIUC</router-link
           >
         </li>
-        <li>University of Michigan</li>
-        <li>UIUC</li>
         <li>University of Waterloo</li>
         <li>University of Wisconsin, Madison</li>
       </ul>
